@@ -90,22 +90,43 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(result);
 
                 String weatherInfo = jsonObject.getString("weather");
+                String temperatureInfo = jsonObject.getString("main");
+
+                JSONObject jsonObject1 = new JSONObject(temperatureInfo);
 
                 JSONArray arr = new JSONArray(weatherInfo);
+
 
                 for(int i = 0;i<arr.length();i++){
 
                     JSONObject jsonPart = arr.getJSONObject(i);
 
+
                     String main = "";
                     String description = "";
+
+                    String temp = "";
+                    String humidity = "";
+                    String pressure = "";
 
                     main = jsonPart.getString("main");
                     description = jsonPart.getString("description");
 
-                    if (main != "" && description != "") {
+                    temp = jsonObject1.getString("temp");
 
-                        message += "Main: "+main + "\r\n " +"Description: "+ description + "\r\n";
+                    double temp1 = Double.parseDouble(temp);
+                    temp1 = temp1 - 273;
+                    String temp2 = String.format("%.2f", temp1);
+
+
+
+                    humidity = jsonObject1.getString("humidity");
+                    pressure = jsonObject1.getString("pressure");
+
+                    if (main != "" && description != "" && temp != "" && humidity != "" && pressure != "") {
+
+                        message += "Main: "+main + "\n" +"Description: "+ description + "\n";
+                        message += "Temperature: "+temp2+"\u00b0 C"+ "\n" +"Humidity: "+ humidity +"%"+ "\n";
 
                     }
                 }
