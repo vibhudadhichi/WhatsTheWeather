@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (main != "" && description != "") {
 
-                        message += main + ": " + description + "\r\n";
+                        message += "Main: "+main + "\r\n " +"Description: "+ description + "\r\n";
 
                     }
                 }
